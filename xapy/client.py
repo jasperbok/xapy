@@ -7,7 +7,7 @@ class Client:
     def __init__(self, api_key: str):
         self.api_key = api_key
 
-    def _get(self, endpoint: str):
+    def _get(self, endpoint: str, return_response=False):
         url = "https://xapi.us/v2{}".format(endpoint)
         headers = {
             "X-AUTH": self.api_key,
@@ -17,6 +17,8 @@ class Client:
         res = requests.get(url, headers=headers)
         res.raise_for_status()
 
+        if return_response:
+            return res
         return res.json()
 
     def get_profile(self):
