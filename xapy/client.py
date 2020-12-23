@@ -22,3 +22,15 @@ class Client:
     def get_profile(self):
         """Return profile information for the authenticated user."""
         return self._get("/profile")
+
+    def get_account_xuid(self):
+        """Return the Xbox User ID of the authenticated user."""
+        return self._get("/accountXuid")
+
+    def get_messages(self):
+        """Return the messages for the authenticated user."""
+        return self._get("/messages")
+
+    def get_conversations(self):
+        """Return the conversations for the authenticated user."""
+        return self._get("/conversations")
