@@ -41,7 +41,7 @@ class Client:
         """Return the Xbox User ID that belongs to a specific gamertag."""
         return self._get("/xuid/{}".format(gamertag))
 
-    def get_gamertag_for_xuid(self, xuid: str):
+    def get_gamertag_for_xuid(self, xuid: str) -> str:
         """Return the gamertag that belongs to a specific Xbox User ID."""
         res = self._get("/gamertag/{}".format(xuid), return_response=True)
         return res.text
