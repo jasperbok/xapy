@@ -10,7 +10,7 @@ setuptools.setup(
     author_email='hello@jasperbok.nl',
     description='A Python wrapper around the xapi.us Xbox API',
     long_description=long_description,
-    long_description_content_type='text/rst',
+    long_description_content_type='text/x-rst',
     url='https://github.com/jasperbok/xapy',
     packages=setuptools.find_packages(),
     classifiers=[
