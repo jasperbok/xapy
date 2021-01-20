@@ -13,6 +13,7 @@ setuptools.setup(
     long_description_content_type='text/x-rst',
     url='https://github.com/jasperbok/xapy',
     packages=setuptools.find_packages(),
+    install_requires=['requests'],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
