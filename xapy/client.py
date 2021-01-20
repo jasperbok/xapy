@@ -1,6 +1,8 @@
 # encoding: utf-8
 import requests
 
+from .gamercard import Gamercard
+
 
 class Client:
 
@@ -58,3 +60,7 @@ class Client:
     def get_profile_for_xuid(self, xuid: str):
         """Return profile information for a specific Xbox User ID."""
         return self._get('/{}/new-profile'.format(xuid))
+
+    def get_gamercard_for_xuid(self, xuid: str) -> Gamercard:
+        """Return the gamercard for a specific Xbox User ID."""
+        return Gamercard.from_api_response(self._get('/{}/gamercard'.format(xuid)))
