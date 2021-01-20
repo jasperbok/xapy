@@ -23,7 +23,7 @@ class Client:
         url = "https://xapi.us/v2{}".format(endpoint)
         headers = {
             "X-AUTH": self.api_key,
-            "Accept-Language": "nl-NL"
+            "Accept-Language": self.lang
         }
 
         res = requests.get(url, headers=headers)
