@@ -4,8 +4,17 @@ import requests
 
 class Client:
 
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, lang: str = "en-US"):
+        """Create a new Client instance.
+
+        Arguments:
+        api_key -- the API key from your xapi.us profile
+
+        Keyword arguments:
+        lang -- the language code to send to the API (default "en-US")
+        """
         self.api_key = api_key
+        self.lang = lang
 
     def _get(self, endpoint: str, return_response=False):
         url = "https://xapi.us/v2{}".format(endpoint)
