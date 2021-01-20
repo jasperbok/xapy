@@ -1,6 +1,7 @@
 # encoding: utf-8
 import requests
 
+from .game import Game
 from .gamercard import Gamercard
 
 
@@ -64,3 +65,42 @@ class Client:
     def get_gamercard_for_xuid(self, xuid: str) -> Gamercard:
         """Return the gamercard for a specific Xbox User ID."""
         return Gamercard.from_api_response(self._get('/{}/gamercard'.format(xuid)))
+
+    def get_xbox360_games_for_xuid(self, xuid: str):
+        """Return the list of Xbox 360 games for a specific Xbox User ID."""
+        res = self._get('/{}/xbox360games'.format(xuid))
+        games = []
+        for data in res['titles']:
+            games.append(Game(
+                data['titleId'],
+                data['name'],
+                data['totalGamerscore'],
+                data['currentGamerscore'],
+                data['currentAchievements'],
+                Game.XBOX_360
+            ))
+
+        return games
+
+    def get_xboxone_games_for_xuid(self, xuid: str):
+        """Return the list of Xbox One games for a specific Xbox User ID."""
+        res = self._get('/{}/xboxonegames'.format(xuid))
+        games = []
+        for data in res['titles']:
+            if data['platform'] == 'XboxOne' or data['platform'] == 'Durango':  # 'Durango' is a codename for Xbox One.
+                platform = Game.XBOX_ONE
+            elif data['platform'] == 'WindowsOneCore':
+                platform = Game.WINDOWS
+            else:
+                print(data['platform'])
+                platform = Game.UNKNOWN
+            games.append(Game(
+                data['titleId'],
+                data['name'],
+                data['maxGamerscore'],
+                data['currentGamerscore'],
+                data['earnedAchievements'],
+                platform
+            ))
+
+        return games
