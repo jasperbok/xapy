@@ -1,6 +1,7 @@
 # encoding: utf-8
 import requests
 
+from .achievement import Achievement
 from .game import Game
 from .gamercard import Gamercard
 
@@ -104,3 +105,21 @@ class Client:
             ))
 
         return games
+
+    def get_title_achievements_for_xuid(self, xuid: str, title_id: int) -> list[Achievement]:
+        """Return the list of a game's achievements.
+
+        :param xuid: An Xbox User ID.
+        :param title_id: The ID of the game to retrieve achievements for.
+        :type xuid: str
+        :type title_id: int
+        :return: A list of Achievement objects.
+        :rtype: list[Achievement]
+        """
+        data = self._get('/{}/achievements/{}'.format(xuid, title_id))
+        achievements = []
+
+        for achievement_data in data:
+            achievements.append(Achievement.from_api_response(achievement_data))
+
+        return achievements
