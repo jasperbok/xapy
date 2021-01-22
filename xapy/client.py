@@ -8,7 +8,7 @@ from .gamercard import Gamercard
 
 class Client:
 
-    def __init__(self, api_key: str, lang: str = "en-US"):
+    def __init__(self, api_key: str, lang: str = "en-US", xuid: int = None):
         """Create a new Client instance.
 
         Arguments:
@@ -19,6 +19,7 @@ class Client:
         """
         self.api_key = api_key
         self.lang = lang
+        self.xuid = xuid
 
     def _get(self, endpoint: str, return_response=False):
         url = "https://xapi.us/v2{}".format(endpoint)
