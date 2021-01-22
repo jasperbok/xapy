@@ -54,20 +54,20 @@ class Client:
         """Return the Xbox User ID that belongs to a specific gamertag."""
         return self._get("/xuid/{}".format(gamertag))
 
-    def get_gamertag_for_xuid(self, xuid: str) -> str:
+    def get_gamertag_for_xuid(self, xuid: int) -> str:
         """Return the gamertag that belongs to a specific Xbox User ID."""
         res = self._get("/gamertag/{}".format(xuid), return_response=True)
         return res.text
 
-    def get_profile_for_xuid(self, xuid: str):
+    def get_profile_for_xuid(self, xuid: int):
         """Return profile information for a specific Xbox User ID."""
         return self._get('/{}/new-profile'.format(xuid))
 
-    def get_gamercard_for_xuid(self, xuid: str) -> Gamercard:
+    def get_gamercard_for_xuid(self, xuid: int) -> Gamercard:
         """Return the gamercard for a specific Xbox User ID."""
         return Gamercard.from_api_response(self._get('/{}/gamercard'.format(xuid)))
 
-    def get_xbox360_games_for_xuid(self, xuid: str):
+    def get_xbox360_games_for_xuid(self, xuid: int):
         """Return the list of Xbox 360 games for a specific Xbox User ID."""
         res = self._get('/{}/xbox360games'.format(xuid))
         games = []
@@ -83,7 +83,7 @@ class Client:
 
         return games
 
-    def get_xboxone_games_for_xuid(self, xuid: str):
+    def get_xboxone_games_for_xuid(self, xuid: int):
         """Return the list of Xbox One games for a specific Xbox User ID."""
         res = self._get('/{}/xboxonegames'.format(xuid))
         games = []
@@ -106,12 +106,12 @@ class Client:
 
         return games
 
-    def get_title_achievements_for_xuid(self, xuid: str, title_id: int) -> list[Achievement]:
+    def get_title_achievements_for_xuid(self, xuid: int, title_id: int) -> list[Achievement]:
         """Return the list of a game's achievements.
 
         :param xuid: An Xbox User ID.
         :param title_id: The ID of the game to retrieve achievements for.
-        :type xuid: str
+        :type xuid: int
         :type title_id: int
         :return: A list of Achievement objects.
         :rtype: list[Achievement]
